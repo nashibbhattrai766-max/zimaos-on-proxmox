@@ -1,0 +1,9 @@
+[Unit]
+Description=Start the NAS VM once USB drives are present
+After=pve-guests.service
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/start-nas-when-ready.sh
+[Install]
+WantedBy=multi-user.target
+
