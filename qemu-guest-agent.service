@@ -1,0 +1,17 @@
+# QEMU guest agent for ZimaOS running as a Proxmox VM.
+# ZimaOS ships the qemu-ga binary but no service to start it. Install inside ZimaOS (as root):
+#   cp qemu-guest-agent.service /etc/systemd/system/
+#   systemctl daemon-reload && systemctl enable qemu-guest-agent
+# Then on the Proxmox node:  qm set <vmid> --agent enabled=1   and do a FULL stop + start of the VM.
+# A large ZimaOS update may replace /etc - if the VM's IP disappears from Proxmox, reinstall this file.
+[Unit]
+Description=QEMU Guest Agent
+After=multi-user.target
+
+[Service]
+ExecStart=/usr/bin/qemu-ga -m virtio-serial -p /dev/virtio-ports/org.qemu.guest_agent.0
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
