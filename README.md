@@ -1,13 +1,13 @@
 # ZimaOS NAS as a Proxmox VM
 
-[ZimaOS](https://github.com/IceWhaleTech/ZimaOS) running as a VM on Proxmox VE, serving a software-RAID volume on disks in a **USB multi-bay enclosure** passed through to the VM. It hosts SMB shares, the Immich photo library, Jellyfin and other Docker apps from the ZimaOS app store.
+[ZimaOS](https://github.com/IceWhaleTech/ZimaOS) running as a VM on Proxmox VE, serving a **RAID 1 mirror** on the two disks of a **Yottamaster 2-bay USB enclosure** passed through to the VM. It hosts SMB shares, the Immich photo library, Jellyfin and other Docker apps from the ZimaOS app store.
 
 ## Layout
 
 | | |
 |---|---|
 | VM | 4 vCPU, 8–12 GB RAM, 120 GB system disk on the node's NVMe |
-| Data | USB enclosure → passed through to the VM → software RAID (`md`) volume, ~5.5 TB |
+| Data | Yottamaster 2-bay USB enclosure → passed through to the VM → RAID 1 mirror (`md`), ~5.5 TB usable |
 | Apps | Immich, Jellyfin, node-exporter, photo backup container |
 | Backups | VM disk: nightly to Proxmox Backup Server. Photo library: [immich-pbs-backup](https://github.com/nashibbhattrai766-max/immich-pbs-backup) |
 
